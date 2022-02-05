@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrlShortener.WebApi", "UrlShortener.WebApi\UrlShortener.WebApi.csproj", "{BA2C01AF-A2B6-4B7A-909C-C09C33864722}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrlShortener.Library", "UrlShortener.Library\UrlShortener.Library.csproj", "{84DEBF46-756B-4264-B90D-7C6162EE5542}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionFolder", "{E87916FF-21BB-4D64-8530-32E638BBB9A3}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA2C01AF-A2B6-4B7A-909C-C09C33864722}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA2C01AF-A2B6-4B7A-909C-C09C33864722}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA2C01AF-A2B6-4B7A-909C-C09C33864722}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA2C01AF-A2B6-4B7A-909C-C09C33864722}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84DEBF46-756B-4264-B90D-7C6162EE5542}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84DEBF46-756B-4264-B90D-7C6162EE5542}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84DEBF46-756B-4264-B90D-7C6162EE5542}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84DEBF46-756B-4264-B90D-7C6162EE5542}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85D9744B-BEDD-4229-9318-0CEE453CB922}
+	EndGlobalSection
+EndGlobal
