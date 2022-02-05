@@ -9,13 +9,13 @@
             _urlService = urlService;
         }
 
-        [HttpPost("post")]
-        public async Task<IActionResult> CreatePost([FromBody] CreatePostCommand command)
+        [HttpPost("url")]
+        public async Task<IActionResult> CreatePost([FromBody] string url)
         {
-            var result = await Mediator.Send(command);
-            return Ok(result);
+            return Ok();
         }
 
+/*
         [HttpPut("post")]
         public async Task<IActionResult> UpdatePost([FromBody] UpdatePostCommand command)
         {
@@ -43,5 +43,7 @@
             var result = await Mediator.Send(new GetPostsQuery { });
             return Ok(result);
         }
+*/
+
     }
 }
