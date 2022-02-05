@@ -343,10 +343,10 @@ ASALocalRun/
 .pnp.js
 
 # testing
-/coverage
+/UrlShortener.Client/coverage
 
 # production
-/build
+/UrlShortener.Client/build
 
 # misc
 .DS_Store
@@ -355,11 +355,8 @@ ASALocalRun/
 .env.test.local
 .env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+/UrlShortener.Client/npm-debug.log*
+/UrlShortener.Client/yarn-debug.log*
+/UrlShortener.Client/yarn-error.log*
 
-/package-lock.json
-
-
-
+/UrlShortener.Client/package-lock.json
