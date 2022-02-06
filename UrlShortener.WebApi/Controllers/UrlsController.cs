@@ -1,49 +1,66 @@
 ﻿namespace UrlShortener.WebApi.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class UrlsController : ApiControllerBase
     {
-        private readonly IUrlService _urlService;
-
-        public UrlsController(IUrlService urlService)
-        {
-            _urlService = urlService;
-        }
-
         [HttpPost("url")]
-        public async Task<IActionResult> CreatePost([FromBody] string url)
+        public async Task<IActionResult> CreateUrl([FromBody] CreateUrlCommand command)
         {
-            return Ok();
+            command.EndpointUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}/";
+
+            command.EndpointUrl = null;
+
+            var result = await Mediator.Send(command);
+            return result.Successful == true
+                ? Ok(result)
+                : BadRequest(result);
         }
 
-/*
-        [HttpPut("post")]
-        public async Task<IActionResult> UpdatePost([FromBody] UpdatePostCommand command)
+        [HttpPut("url")]
+        public async Task<IActionResult> UpdateUrl([FromBody] UpdateUrlCommand command)
         {
             var result = await Mediator.Send(command);
-            return Ok(result);
+            return result.Successful == true
+                ? Ok(result)
+                : BadRequest(result);
         }
 
-        [HttpDelete("post/{id}/{userId}")]
-        public async Task<IActionResult> DeletePost(int id, int userId)
+        [HttpDelete("url/{id}")]
+        public async Task<IActionResult> DeleteUrl(int id, int userId)
         {
-            var result = await Mediator.Send(new DeletePostCommand { Id = id });
-            return Ok(result);
+            var result = await Mediator.Send(new DeleteUrlCommand { Id = id });
+            return result.Successful == true
+                ? Ok(result)
+                : BadRequest(result);
         }
 
-        [HttpGet("post/{id}")]
-        public async Task<IActionResult> GetPost(int id)
+        [HttpGet("url/{id}")]
+        public async Task<IActionResult> GetUrl(int id)
         {
-            var result = await Mediator.Send(new GetPostByIdQuery { Id = id });
-            return Ok(result);
+            var result = await Mediator.Send(new GetUrlByIdQuery { Id = id });
+            return result.Successful == true
+                ? Ok(result)
+                : BadRequest(result);
         }
 
-        [HttpGet("posts/{userId}")]
-        public async Task<IActionResult> GetPosts(int userId)
+        //[HttpGet]
+        //[Route("{key}")]
+        //public async Task<IActionResult> GetUrlByUrlKey(string urlKey)
+        //{
+        //    var result = await Mediator.Send(new GetUrlByUrlKeyQuery { UrlKey = urlKey });
+        //    return result.Successful == true
+        //        ? RedirectPermanent(result.Item.OriginalUrl)
+        //        : BadRequest(result);
+        //}
+
+        [HttpGet("urls")]
+        public async Task<IActionResult> GetUrls()
         {
-            var result = await Mediator.Send(new GetPostsQuery { });
-            return Ok(result);
+            var result = await Mediator.Send(new GetUrlsQuery { });
+            return result.Successful == true
+                ? Ok(result)
+                : BadRequest(result);
         }
-*/
-
     }
 }

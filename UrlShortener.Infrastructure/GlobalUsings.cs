@@ -1,0 +1,12 @@
+﻿global using UrlShortener.Application.Common.Interfaces;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.DependencyInjection;
+global using UrlShortener.Infrastructure.Persistence;
+global using UrlShortener.Infrastructure.Services;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using System.Reflection;
+global using UrlShortener.Domain.Common;
+global using UrlShortener.Domain.Entities;
+global using UrlShortener.Domain.Entities.IdentityCore;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
