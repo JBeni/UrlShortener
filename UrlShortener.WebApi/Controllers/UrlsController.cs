@@ -33,15 +33,6 @@
                 : BadRequest(result);
         }
 
-        [HttpGet("url/{id}")]
-        public async Task<IActionResult> GetUrl(int id)
-        {
-            var result = await Mediator.Send(new GetUrlByIdQuery { Id = id });
-            return result.Successful == true
-                ? Ok(result)
-                : BadRequest(result);
-        }
-
         [HttpGet("urls")]
         public async Task<IActionResult> GetUrls()
         {

@@ -8,6 +8,7 @@
         {
             var result = await Mediator.Send(new GetUrlByUrlKeyQuery { UrlKey = urlKey });
 
+            if (!result.Successful) return BadRequest(result);
             await Mediator.Send(new CreateStatisticsCommand
             {
                 UrlId = result.Item.Id,
@@ -16,9 +17,7 @@
                 AccessedAt = DateTime.Now
             });
 
-            return result.Successful == true
-                ? RedirectPermanent(result.Item.OriginalUrl)
-                : BadRequest(result);
+            return RedirectPermanent(result.Item.OriginalUrl);
         }
     }
 }

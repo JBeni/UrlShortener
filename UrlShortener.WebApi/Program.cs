@@ -56,7 +56,7 @@ try
         app.UseSwaggerUI();
     }
 
-    app.UseCors("TravelBlogPostCors");
+    app.UseCors("EnableCORS");
     app.UseHttpsRedirection();
     app.UseStaticFiles();
     app.UseRouting();

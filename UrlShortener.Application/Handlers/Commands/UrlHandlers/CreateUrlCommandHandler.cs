@@ -28,7 +28,7 @@
                     throw new Exception("Url value is not a valid Url");
                 }
 
-                var urlKey = ShortId.Generate(new GenerationOptions { UseNumbers = true, UseSpecialCharacters = true, Length = 7 });
+                var urlKey = ShortId.Generate(new GenerationOptions { UseNumbers = true, UseSpecialCharacters = true, Length = 9 });
                 var entity = new Url
                 {
                     OriginalUrl = request.OriginalUrl,

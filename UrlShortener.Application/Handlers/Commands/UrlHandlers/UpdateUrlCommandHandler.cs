@@ -22,7 +22,7 @@
                 var entity = _context.Urls.SingleOrDefault(d => d.Id == request.Id);
                 if (entity == null) throw new Exception("The entity does not exist");
 
-                var urlKey = ShortId.Generate(new GenerationOptions { UseNumbers = true, UseSpecialCharacters = true });
+                var urlKey = ShortId.Generate(new GenerationOptions { UseNumbers = true, UseSpecialCharacters = true, Length = 9 });
 
                 entity.ShortUrl = request.EndpointUrl + urlKey;
                 entity.UrlKey = urlKey;
