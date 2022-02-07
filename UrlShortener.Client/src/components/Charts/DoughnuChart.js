@@ -5,30 +5,47 @@ const containerStyles = {
     maxWidth: 600,
 };
 
-export default class DoughnutChartExample extends React.Component {
+export default class DoughnutChart extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            labels: ['Data-Red', 'Data-Orange', 'Data-Yellow', 'Data-Green'],
-            dataset: [
-                {
-                    value: 10,
-                    color: '#fe4849',
-                },
-                {
-                    value: 15,
-                    color: '#ff6837',
-                },
-                {
-                    value: 42,
-                    color: '#ffcc00',
-                },
-                {
-                    value: 33,
-                    color: '#1ad1a3',
-                },
-            ],
+            colors: ['#fe4849', '#ff6837', '#ffcc00', '#1ad1a3'],
+            // labels: ['Data-Red', 'Data-Orange', 'Data-Yellow', 'Data-Green'],
+            // dataset: [
+            //     {
+            //         value: 10,
+            //         color: '#fe4849',
+            //     },
+            //     {
+            //         value: 15,
+            //         color: '#ff6837',
+            //     },
+            //     {
+            //         value: 42,
+            //         color: '#ffcc00',
+            //     },
+            //     {
+            //         value: 33,
+            //         color: '#1ad1a3',
+            //     },
+            // ],
+
+            labels: [],
+            dataset: [],
         };
+    }
+
+    componentDidMount() {
+        console.log(this.props.data);
+        if (this.props.data !== undefined) {
+            var index = 0;
+            for (var i = 0; i < this.props.data.length; i++) {
+                this.setState({ labels: [...this.state.labels, this.props.data[i].name] });
+                var newDataset = { value: this.props.data[i].value, color: this.state.colors[index] };
+                index++;
+                this.setState({ dataset: [...this.state.dataset, newDataset] });
+            }
+        }
     }
 
     renderDataset() {
