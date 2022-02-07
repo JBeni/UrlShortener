@@ -1,4 +1,4 @@
-﻿namespace UrlShortener.Application.Handlers.Queries
+﻿namespace UrlShortener.Application.Handlers.Queries.UrlHandlers
 {
     public class GetUrlByUrlKeyQuery : IRequest<Result<UrlResponse>>
     {
@@ -23,16 +23,15 @@
                 var url = _context.Urls.FirstOrDefault(x => x.UrlKey == request.UrlKey);
                 if (url == null) throw new Exception("The url does not exists");
 
-                url.Clicks = url.Clicks + 1;
+                url.Clicks++;
 
                 _context.Urls.Update(url);
                 await _context.SaveChangesAsync(cancellationToken);
 
-                var newUrl = _mapper.Map<UrlResponse>(url);
                 return new Result<UrlResponse>
                 {
                     Successful = true,
-                    Item = newUrl ?? new UrlResponse()
+                    Item = _mapper.Map<UrlResponse>(url) ?? new UrlResponse()
                 };
             }
             catch (Exception ex)

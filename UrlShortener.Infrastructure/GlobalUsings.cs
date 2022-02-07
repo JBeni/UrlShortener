@@ -10,3 +10,4 @@ global using UrlShortener.Domain.Common;
 global using UrlShortener.Domain.Entities;
 global using UrlShortener.Domain.Entities.IdentityCore;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Microsoft.Extensions.Configuration;

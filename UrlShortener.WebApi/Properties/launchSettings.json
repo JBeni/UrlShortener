@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "UrlShortener": {
+    "UrlShortener.WebApi": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

@@ -13,7 +13,7 @@ try
     });
 
     builder.Services.AddApplicationLayer();
-    builder.Services.AddInfrastructureLayer();
+    builder.Services.AddInfrastructureLayer(builder.Configuration);
 
     builder.Services.AddHttpContextAccessor();
     builder.Services.AddControllers(options =>

@@ -1,4 +1,4 @@
-﻿namespace UrlShortener.Application.Handlers.Queries
+﻿namespace UrlShortener.Application.Handlers.Queries.UrlHandlers
 {
     public class GetUrlsQuery : IRequest<Result<UrlResponse>>
     {

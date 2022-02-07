@@ -1,6 +1,6 @@
 ﻿namespace UrlShortener.Infrastructure.Persistence
 {
-    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<int>, int>, IApplicationDbContext
+    public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         private readonly IDateTime _dateTime;
 
@@ -12,6 +12,7 @@
         }
 
         public DbSet<Url> Urls => Set<Url>();
+        public DbSet<Statistics> Statistics => Set<Statistics>();
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

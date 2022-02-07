@@ -28,12 +28,13 @@
                     throw new Exception("Url value is not a valid Url");
                 }
 
-                var urlKey = ShortId.Generate(new GenerationOptions { UseNumbers = true, UseSpecialCharacters = true });
+                var urlKey = ShortId.Generate(new GenerationOptions { UseNumbers = true, UseSpecialCharacters = true, Length = 7 });
                 var entity = new Url
                 {
                     OriginalUrl = request.OriginalUrl,
                     ShortUrl = request.EndpointUrl + urlKey,
-                    UrlKey = urlKey
+                    UrlKey = urlKey,
+                    Clicks = 0
                 };
 
                 _context.Urls.Add(entity);

@@ -3,8 +3,7 @@
     public class UpdateUrlCommand : IRequest<RequestResponse>
     {
         public int Id { get; set; }
-        public string? OriginalUrl { get; set; }
-        public string? UrlKey { get; set; }
+        public string? EndpointUrl { get; set; }
     }
 
     public class UpdateUrlCommandHandler : IRequestHandler<UpdateUrlCommand, RequestResponse>
@@ -23,10 +22,15 @@
                 var entity = _context.Urls.SingleOrDefault(d => d.Id == request.Id);
                 if (entity == null) throw new Exception("The entity does not exist");
 
-                entity.OriginalUrl = request.OriginalUrl;
-                entity.UrlKey = request.UrlKey;
+                var urlKey = ShortId.Generate(new GenerationOptions { UseNumbers = true, UseSpecialCharacters = true });
+
+                entity.ShortUrl = request.EndpointUrl + urlKey;
+                entity.UrlKey = urlKey;
+                entity.Clicks = 0;
 
                 _context.Urls.Update(entity);
+                var statistics = _context.Statistics.Where(x => x.Url.Id == request.Id).ToList();
+                _context.Statistics.RemoveRange(statistics);
                 await _context.SaveChangesAsync(cancellationToken);
 
                 return RequestResponse.Success();

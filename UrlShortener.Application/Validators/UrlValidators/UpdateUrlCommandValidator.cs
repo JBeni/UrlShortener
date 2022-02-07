@@ -7,15 +7,10 @@
             RuleFor(v => v.Id)
                 .GreaterThan(0).WithMessage("Id must be greater than 0");
 
-            RuleFor(v => v.OriginalUrl)
+            RuleFor(v => v.EndpointUrl)
                 .MaximumLength(3000).WithMessage("Maximum length exceeded")
-                .NotEmpty().WithMessage("OriginalUrl must not be empty")
-                .NotNull().WithMessage("OriginalUrl must not be null");
-
-            RuleFor(v => v.UrlKey)
-                .MaximumLength(200).WithMessage("Maximum length exceeded")
-                .NotEmpty().WithMessage("UrlKey must not be empty")
-                .NotNull().WithMessage("UrlKey must not be null");
+                .NotEmpty().WithMessage("EndpointUrl must not be empty")
+                .NotNull().WithMessage("EndpointUrl must not be null");
         }
     }
 }

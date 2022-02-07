@@ -8,9 +8,6 @@
         public async Task<IActionResult> CreateUrl([FromBody] CreateUrlCommand command)
         {
             command.EndpointUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}/";
-
-            command.EndpointUrl = null;
-
             var result = await Mediator.Send(command);
             return result.Successful == true
                 ? Ok(result)
@@ -20,6 +17,7 @@
         [HttpPut("url")]
         public async Task<IActionResult> UpdateUrl([FromBody] UpdateUrlCommand command)
         {
+            command.EndpointUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}/";
             var result = await Mediator.Send(command);
             return result.Successful == true
                 ? Ok(result)
@@ -27,7 +25,7 @@
         }
 
         [HttpDelete("url/{id}")]
-        public async Task<IActionResult> DeleteUrl(int id, int userId)
+        public async Task<IActionResult> DeleteUrl(int id)
         {
             var result = await Mediator.Send(new DeleteUrlCommand { Id = id });
             return result.Successful == true
@@ -43,16 +41,6 @@
                 ? Ok(result)
                 : BadRequest(result);
         }
-
-        //[HttpGet]
-        //[Route("{key}")]
-        //public async Task<IActionResult> GetUrlByUrlKey(string urlKey)
-        //{
-        //    var result = await Mediator.Send(new GetUrlByUrlKeyQuery { UrlKey = urlKey });
-        //    return result.Successful == true
-        //        ? RedirectPermanent(result.Item.OriginalUrl)
-        //        : BadRequest(result);
-        //}
 
         [HttpGet("urls")]
         public async Task<IActionResult> GetUrls()

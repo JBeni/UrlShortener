@@ -16,4 +16,4 @@ global using Microsoft.Extensions.Configuration;
 global using shortid;
 global using shortid.Configuration;
 global using UrlShortener.Application.Handlers.Commands.UrlHandlers;
-global using UrlShortener.Application.Handlers.Queries;
+global using UrlShortener.Application.Handlers.Queries.UrlHandlers;

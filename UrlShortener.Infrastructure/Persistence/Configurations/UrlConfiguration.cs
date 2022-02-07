@@ -10,8 +10,11 @@
             builder.Property(t => t.OriginalUrl)
                 .HasMaxLength(3000)
                 .IsRequired();
+            builder.Property(t => t.ShortUrl)
+                .HasMaxLength(100)
+                .IsRequired();
             builder.Property(t => t.UrlKey)
-                .HasMaxLength(200)
+                .HasMaxLength(100)
                 .IsRequired();
             builder.Property(t => t.Clicks)
                 .IsRequired();
