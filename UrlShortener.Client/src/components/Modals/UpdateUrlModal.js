@@ -10,9 +10,8 @@ import {
     MDBModalFooter,
 } from "mdb-react-ui-kit";
 
-export default function UpdateUrl() {
+export default function UpdateUrlModal() {
     const [basicModal, setBasicModal] = useState(false);
-
     const toggleShow = () => setBasicModal(!basicModal);
 
     return (

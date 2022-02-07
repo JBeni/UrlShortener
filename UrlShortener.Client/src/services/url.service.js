@@ -1,4 +1,4 @@
-import { APIEndpoint } from '../services/ApiConfiguration';
+import { APIEndpoint } from './ApiConfiguration';
 const axios = require("axios");
 
 const apiUrl = `${APIEndpoint.apiUrl}/Urls`;

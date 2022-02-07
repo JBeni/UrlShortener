@@ -5,13 +5,14 @@ import {
     MDBCol,
     MDBBtn,
     MDBContainer,
+    MDBModal
 } from "mdb-react-ui-kit";
-import { initialFormValues } from '../services/ApiConfiguration';
+import { notifyToastInfo, copyToClipboard } from '../services/helper.service';
 import * as urlService from '../services/url.service';
-import { toast } from 'react-hot-toast';
+import DeleteUrlModal from "./Modals/DeleteUrlModal";
 
 export default function UrlsTable() {
-    const [showModal, setShowModal] = useState(false);
+    const [showDeleteUrl, setShowDeleteUrl] = useState(false);
     const [selectedRow, setSelectedRow] = useState(0);
     const [urlsList, setUrlsList] = useState([]);
 
@@ -22,30 +23,15 @@ export default function UrlsTable() {
         })();
     }, []);
 
-    const handlePopup = (value) => {
-        setShowModal(value);
-        setSelectedRow(0);
-    }
-
-    const copyToClipboard = (value) => {
-        navigator.clipboard.writeText(value);
-        notifyToastInfo("Value copied to clipboard");
-    }
-
-    const notifyToastInfo = (message) => {
-        toast.success(message, {
-            position: 'bottom-center',
-            duration: 3000,
-        });
+    const handleDeleteUrlPopup = (value) => {
+        setShowDeleteUrl(value);
+        urlService.deleteUrlShorten(selectedRow);
+        notifyToastInfo("The Url was deleted");
     }
 
     const performDelete = (item) => {
         setSelectedRow(item.id);
-        openModal(true);
-    };
-
-    const openModal = (value) => {
-        setShowModal(true);
+        setShowDeleteUrl(true);
     }
 
     const getTableHead = () => {
@@ -89,7 +75,7 @@ export default function UrlsTable() {
                                 </button>
                             </MDBTypography>
                         </MDBCol>
-                        <MDBCol className="col-md-2">
+                        <MDBCol className="col-md-1">
                             <MDBTypography note noteColor="primary" className="text-truncate" onClick={() => { copyToClipboard(item.urlKey); }}>
                                 <button style={{ border: 'none', padding: '0', background: 'none' }}>
                                     {item.urlKey}
@@ -101,11 +87,10 @@ export default function UrlsTable() {
                                 {item.clicks}
                             </MDBTypography>
                         </MDBCol>
-                        <MDBCol>
+                        <MDBCol className="col-md-4">
                             <MDBBtn
                                 type="submit"
                                 color="primary"
-                                className="border"
                                 style={{ marginRight: '10px' }}
                             >
                                 Update
@@ -113,11 +98,18 @@ export default function UrlsTable() {
                             <MDBBtn
                                 type="submit"
                                 color="danger"
-                                className="border"
                                 style={{ marginRight: '10px' }}
                                 onClick={() => { performDelete(item); }}
                             >
                                 Delete
+                            </MDBBtn>
+                            <MDBBtn
+                                type="submit"
+                                color="secondary"
+                                style={{ marginRight: '10px' }}
+                                onClick={() => { }}
+                            >
+                                View Charts
                             </MDBBtn>
                         </MDBCol>
                     </MDBRow>
@@ -134,6 +126,10 @@ export default function UrlsTable() {
                     getTableHead(), getTableBody()
                 }
             </MDBContainer>
+
+            <MDBModal show={showDeleteUrl} setShow={setShowDeleteUrl} tabIndex='-1'>
+                <DeleteUrlModal id={selectedRow} handlePopup={handleDeleteUrlPopup.bind(this)} />
+            </MDBModal>
         </>
     );
 }

@@ -7,21 +7,17 @@ import {
     MDBBtn,
     MDBModal
 } from "mdb-react-ui-kit";
-import { initialFormValues } from '../services/ApiConfiguration';
+import { initialFormValues, copyToClipboard } from '../services/helper.service';
 import * as urlService from '../services/url.service';
 import ErrorModal from "./Modals/ErrorModal";
-import { toast } from 'react-hot-toast';
-import DeleteUrlModal from "./Modals/DeleteUrlModal";
 
 export default function AddUrlForm() {
-    const [showModal, setShowModal] = useState(false);
-    const [selectedRow, setSelectedRow] = useState(0);
+    const [showError, setShowError] = useState(false);
     const [values, setValues] = useState(initialFormValues);
     const [url, setUrl] = useState('');
 
-    const handlePopup = (value) => {
-        setShowModal(value);
-        setSelectedRow(0);
+    const handleErrorPopup = (value) => {
+        setShowError(value);
     }
 
     const handleInputChange = (e) => {
@@ -30,26 +26,12 @@ export default function AddUrlForm() {
 
     async function createUrlShortener(e) {
         e.preventDefault();
-
         if (values.urlKey.length <= 0) {
-            setShowModal(true);
+            setShowError(true);
             return;
         }
-
         var response = await urlService.createUrlShorten(url);
         setValues(response.item);
-    }
-
-    const copyToClipboard = (value) => {
-        navigator.clipboard.writeText(value);
-        notifyToastInfo("Value copied to clipboard");
-    }
-
-    const notifyToastInfo = (message) => {
-        toast.success(message, {
-            position: 'bottom-center',
-            duration: 3000,
-        });
     }
 
     return (
@@ -70,12 +52,8 @@ export default function AddUrlForm() {
                     </MDBCol>
                 </MDBRow>
 
-                <MDBModal show={showModal} setShow={showModal} tabIndex='-1'>
-                    <ErrorModal handlePopup={handlePopup.bind(this)} />
-                </MDBModal>
-
-                <MDBModal show={showModal} setShow={showModal} tabIndex='-1'>
-                    <DeleteUrlModal id={selectedRow} handlePopup={handlePopup.bind(this)} />
+                <MDBModal show={showError} setShow={setShowError} tabIndex='-1'>
+                    <ErrorModal handlePopup={handleErrorPopup.bind(this)} />
                 </MDBModal>
             </div>
 

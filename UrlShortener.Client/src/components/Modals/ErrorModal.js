@@ -13,7 +13,7 @@ export default function Error(props) {
 
     const closeModal = (e) => {
 		e.preventDefault();
-        props.handlePopup(false);
+        props.handleErrorPopup(false);
 	};
 
     return (
