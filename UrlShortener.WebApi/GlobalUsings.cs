@@ -1,9 +1,6 @@
 ﻿global using Microsoft.AspNetCore.Mvc;
 global using UrlShortener.Application;
 global using UrlShortener.Infrastructure;
-global using Microsoft.AspNetCore.Authentication.JwtBearer;
-global using Microsoft.IdentityModel.Tokens;
-global using System.Text;
 global using UrlShortener.Application.Handlers.Commands.UrlHandlers;
 global using UrlShortener.Application.Handlers.Queries.UrlHandlers;
 global using MediatR;

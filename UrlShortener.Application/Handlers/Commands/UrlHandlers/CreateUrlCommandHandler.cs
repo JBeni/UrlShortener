@@ -10,13 +10,11 @@
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
-        private readonly IConfiguration _configuration;
 
-        public CreateUrlCommandHandler(IApplicationDbContext context, IMapper mapper, IConfiguration configuration)
+        public CreateUrlCommandHandler(IApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
-            _configuration = configuration;
         }
 
         public async Task<Result<UrlResponse>> Handle(CreateUrlCommand request, CancellationToken cancellationToken)

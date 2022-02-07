@@ -13,7 +13,7 @@ import ErrorModal from "./Modals/ErrorModal";
 
 export default function AddUrlForm() {
     const [showError, setShowError] = useState(false);
-    const [values, setValues] = useState(initialFormValues);
+    const [urlCreated, setUrlCreated] = useState(initialFormValues);
     const [url, setUrl] = useState('');
 
     const handleErrorPopup = (value) => {
@@ -26,12 +26,12 @@ export default function AddUrlForm() {
 
     async function createUrlShortener(e) {
         e.preventDefault();
-        if (values.urlKey.length <= 0) {
+        if (url.length <= 0) {
             setShowError(true);
             return;
         }
         var response = await urlService.createUrlShorten(url);
-        setValues(response.item);
+        setUrlCreated(response.item);
     }
 
     return (
@@ -40,7 +40,7 @@ export default function AddUrlForm() {
                 <MDBRow tag="form" className="gy-2 gx-3 align-items-center">
                     <MDBCol size="auto" className="col-md-8">
                         <MDBInput
-                            onChange={handleInputChange }
+                            onChange={handleInputChange}
                             placeholder="Enter your url to create a short one"
                             label="Url"
                         />
@@ -53,12 +53,12 @@ export default function AddUrlForm() {
                 </MDBRow>
 
                 <MDBModal show={showError} setShow={setShowError} tabIndex='-1'>
-                    <ErrorModal handlePopup={handleErrorPopup.bind(this)} />
+                    <ErrorModal handleErrorPopup={handleErrorPopup.bind(this)} />
                 </MDBModal>
             </div>
 
             {
-                values.urlKey.length > 5 &&
+                urlCreated.urlKey.length > 5 &&
                 <div className="row mt-4">
                     <MDBCol size="auto" className="col-md-6">
                         <MDBTypography
@@ -66,7 +66,7 @@ export default function AddUrlForm() {
                             noteColor="primary"
                             className="text-truncate"
                         >
-                            {values.originalUrl}
+                            {urlCreated.originalUrl}
                         </MDBTypography>
                     </MDBCol>
                     <MDBCol
@@ -75,7 +75,7 @@ export default function AddUrlForm() {
                         style={{ marginLeft: "30px" }}
                     >
                         <MDBTypography note noteColor="primary" className="text-truncate">
-                            {values.shortUrl}
+                            {urlCreated.shortUrl}
                         </MDBTypography>
                     </MDBCol>
                     <MDBCol size="auto" className="mt-1">
@@ -83,7 +83,7 @@ export default function AddUrlForm() {
                             type="submit"
                             color="link"
                             className="border border-primary border-2"
-                            onClick={() => { copyToClipboard(values.shortUrl); }}
+                            onClick={() => { copyToClipboard(urlCreated.shortUrl); }}
                         >
                             Copy
                         </MDBBtn>

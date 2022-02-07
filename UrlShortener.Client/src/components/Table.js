@@ -13,25 +13,38 @@ import DeleteUrlModal from "./Modals/DeleteUrlModal";
 
 export default function UrlsTable() {
     const [showDeleteUrl, setShowDeleteUrl] = useState(false);
+    const [showViewCharts, setShowViewCharts] = useState(false);
     const [selectedRow, setSelectedRow] = useState(0);
     const [urlsList, setUrlsList] = useState([]);
 
     useEffect(() => {
         (async () => {
-            var response = await Promise.resolve(await urlService.getUrlsData());
-            setUrlsList(response.items);
+            await getUrlsList();
         })();
     }, []);
 
-    const handleDeleteUrlPopup = (value) => {
+    async function getUrlsList() {
+        var response = await Promise.resolve(await urlService.getUrlsData());
+        setUrlsList(response.items);
+    }
+
+    const handleDeleteUrlPopup = async (value, isDelete) => {
         setShowDeleteUrl(value);
-        urlService.deleteUrlShorten(selectedRow);
-        notifyToastInfo("The Url was deleted");
+        if (isDelete === 1) {
+            await urlService.deleteUrlShorten(selectedRow);
+            notifyToastInfo("The Url was deleted");
+            await getUrlsList();
+        }
     }
 
     const performDelete = (item) => {
         setSelectedRow(item.id);
         setShowDeleteUrl(true);
+    }
+
+    const viewCharts = (item) => {
+        setSelectedRow(item.id);
+        setShowViewCharts(true);
     }
 
     const getTableHead = () => {
@@ -46,10 +59,10 @@ export default function UrlsTable() {
                 <MDBCol className='col-md-2'>
                     Url Key
                 </MDBCol>
-                <MDBCol className='col-1'>
+                <MDBCol>
                     Clicks
                 </MDBCol>
-                <MDBCol>
+                <MDBCol className="col-md-4">
                     Actions
                 </MDBCol>
             </MDBRow>
@@ -61,7 +74,7 @@ export default function UrlsTable() {
             urlsList.map((item) => {
                 return (
                     <MDBRow className="col-xxl-12">
-                        <MDBCol className="col-md-4">
+                        <MDBCol className="col-md-3">
                             <MDBTypography note noteColor="primary" className="text-truncate" onClick={() => { copyToClipboard(item.originalUrl); }}>
                                 <button style={{ border: 'none', padding: '0', background: 'none' }}>
                                     {item.originalUrl}
@@ -75,7 +88,7 @@ export default function UrlsTable() {
                                 </button>
                             </MDBTypography>
                         </MDBCol>
-                        <MDBCol className="col-md-1">
+                        <MDBCol className="col-2">
                             <MDBTypography note noteColor="primary" className="text-truncate" onClick={() => { copyToClipboard(item.urlKey); }}>
                                 <button style={{ border: 'none', padding: '0', background: 'none' }}>
                                     {item.urlKey}
@@ -107,7 +120,7 @@ export default function UrlsTable() {
                                 type="submit"
                                 color="secondary"
                                 style={{ marginRight: '10px' }}
-                                onClick={() => { }}
+                                onClick={() => { viewCharts(item); }}
                             >
                                 View Charts
                             </MDBBtn>
@@ -123,12 +136,15 @@ export default function UrlsTable() {
             <h4 className="d-flex justify-content-center mt-3 mb-4">Globally Created Shortener Urls</h4>
             <MDBContainer className="col-xxl-12">
                 {
-                    getTableHead(), getTableBody()
+                    getTableHead()
+                }
+                {
+                    getTableBody()
                 }
             </MDBContainer>
 
             <MDBModal show={showDeleteUrl} setShow={setShowDeleteUrl} tabIndex='-1'>
-                <DeleteUrlModal id={selectedRow} handlePopup={handleDeleteUrlPopup.bind(this)} />
+                <DeleteUrlModal id={selectedRow} handleDeleteUrlPopup={handleDeleteUrlPopup.bind(this)} />
             </MDBModal>
         </>
     );

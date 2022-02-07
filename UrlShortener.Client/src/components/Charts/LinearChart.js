@@ -12,27 +12,28 @@ const containerStyles = {
 class LineChart extends Component {
 	constructor(props) {
 		super(props);
-		this.titles = [
-			'Data-Yellow',
-			'Data-Green',
-			'Data-Orange',
-			'Data-Purple',
-			'Data-Dark',
-		];
-		this.colors = ['#ffcc00', '#1ad1a3', '#ff6837', '#663398', '#061c3f'];
-		this.months = [
-			'July',
-			'August',
-			'September',
-			'October',
-			'November',
-			'December',
-		];
-		this.state = {
-			labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+		// this.titles = [
+		// 	'Data-Yellow',
+		// 	'Data-Green',
+		// 	'Data-Orange',
+		// 	'Data-Purple',
+		// 	'Data-Dark',
+		// ];
+		// this.colors = ['#ffcc00', '#1ad1a3', '#ff6837', '#663398', '#061c3f'];
+		// this.months = [
+		// 	'July',
+		// 	'August',
+		// 	'September',
+		// 	'October',
+		// 	'November',
+		// 	'December',
+		// ];
+
+        this.state = {
+			labels: ['Google Chrome', 'Microsoft Edge', 'Opera', 'Safari', 'Mozilla Firefox'],
 			datasets: [
 				{
-					title: 'Data-Red',
+					title: 'Chrome Browser',
 					borderColor: '#fe4849',
 					values: [37, 15, 90, 57, 80, 14],
 				},
@@ -50,7 +51,9 @@ class LineChart extends Component {
 		};
 	}
 
-    componentDidMount() {}
+    componentDidMount() {
+
+    }
 
 	renderDatasets() {
 		const { datasets } = this.state;

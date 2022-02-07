@@ -8,8 +8,6 @@ const containerStyles = {
 export default class DoughnutChartExample extends React.Component {
     constructor(props) {
         super(props);
-        this.titles = ['Data-Blue', 'Data-Purple', 'Data-Dark'];
-        this.colors = ['#01b6f5', '#663398', '#061c3f'];
         this.state = {
             labels: ['Data-Red', 'Data-Orange', 'Data-Yellow', 'Data-Green'],
             dataset: [
@@ -33,27 +31,6 @@ export default class DoughnutChartExample extends React.Component {
         };
     }
 
-    addData() {
-        const { labels, dataset } = this.state;
-        const newLabels = labels.concat(this.titles.shift());
-        const newDataset = dataset.concat({
-            value: Math.round(Math.random() * 100),
-            color: this.colors.shift(),
-        });
-        this.setState({ labels: newLabels, dataset: newDataset });
-    }
-
-    removeData() {
-        const { labels, dataset } = this.state;
-        const lastLabel = labels[labels.length - 1];
-        this.titles.unshift(lastLabel);
-        const newLabels = labels.filter(l => l !== lastLabel);
-        const lastData = dataset[dataset.length - 1];
-        this.colors.unshift(lastData.color);
-        const newDataset = dataset.slice(0, dataset.length - 1);
-        this.setState({ labels: newLabels, dataset: newDataset });
-    }
-
     renderDataset() {
         let data = [];
         let colors = [];
@@ -68,9 +45,6 @@ export default class DoughnutChartExample extends React.Component {
 
     render() {
         const { labels } = this.state;
-
-        const noMoreTitles = this.titles.length === 0;
-        const noMoreLabels = labels.length === 0;
 
         return (
             <div className="rainbow-p-vertical_xx-large rainbow-p-horizontal_medium">

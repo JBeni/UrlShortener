@@ -18,7 +18,7 @@
         {
             try
             {
-                var entity = _context.Urls.SingleOrDefault(d => d.Id == request.Id);
+                var entity = _context.Urls.First(x => x.Id == request.Id);
                 if (entity == null) throw new Exception("The entity does not exist");
 
                 _context.Urls.Remove(entity);

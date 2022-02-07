@@ -1,6 +1,6 @@
 ﻿namespace UrlShortener.Domain.Entities
 {
-    public class Url : AuditableEntity
+    public class Url : EntityBase
     {
         public string? OriginalUrl { get; set; }
         public string? ShortUrl { get; set; }
