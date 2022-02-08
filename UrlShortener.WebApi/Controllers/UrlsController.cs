@@ -41,12 +41,5 @@
                 ? Ok(result)
                 : BadRequest(result);
         }
-
-        [HttpGet("urlsPagination")]
-        public async Task<IActionResult> GetUrlsPagination()
-        {
-            var result = await Mediator.Send(new GetUrlsWithPaginationQuery { });
-            return Ok(result);
-        }
     }
 }

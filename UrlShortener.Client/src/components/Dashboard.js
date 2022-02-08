@@ -253,7 +253,6 @@ export default function Dashboard() {
                     getTableBody()
                 }
             </MDBContainer>
-            <Pagination />
 
             <MDBModal show={showUpdateUrl} setShow={setShowUpdateUrl} tabIndex='-1'>
                 <UpdateUrlModal item={urlCreated} handleUpdateUrlPopup={handleUpdateUrlPopup.bind(this)} />
