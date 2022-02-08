@@ -76,6 +76,7 @@ export default function Dashboard() {
 
     const performUpdate = async (item) => {
         var response = await urlService.updateUrlShorten(item.id);
+        if (response !== undefined) notifyToastInfo("Url was updated");
         setUrlCreated(response.item);
         setUrl({ originalUrl: '' });
         await getUrlsList();
