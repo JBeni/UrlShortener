@@ -8,7 +8,7 @@ import {
     MDBModal,
     MDBInput
 } from "mdb-react-ui-kit";
-import { initialFormValues, notifyToastInfo, copyToClipboard } from '../services/helper.service';
+import { initialFormValues, notifyToastInfo, copyToClipboard, notifyToastError } from '../services/helper.service';
 import * as urlService from '../services/url.service';
 import DeleteUrlModal from "./Modals/DeleteUrlModal";
 import ErrorModal from "./Modals/ErrorModal";
@@ -49,6 +49,8 @@ export default function Dashboard() {
             return;
         }
         var response = await urlService.createUrlShorten(url.originalUrl);
+        if (response === undefined) setUrl({ originalUrl: '' });
+
         setUrlCreated(response.item);
         setUrl({ originalUrl: '' });
         await getUrlsList();

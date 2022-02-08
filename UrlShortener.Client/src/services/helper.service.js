@@ -18,7 +18,7 @@ export const notifyToastInfo = (message) => {
 export const notifyToastError = (message) => {
     toast.error(message, {
         position: 'bottom-center',
-        duration: 3000,
+        duration: 5000,
     });
 }
 
