@@ -92,6 +92,7 @@ export default function Dashboard() {
     }
 
     const getTableHead = () => {
+        if (urlsList.length === 0) return <></>;
         return (
             <MDBRow className="mb-3">
                 <MDBCol className='col-md-3'>
