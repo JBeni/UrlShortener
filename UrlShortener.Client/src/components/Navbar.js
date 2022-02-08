@@ -12,7 +12,7 @@ import {
 } from "mdb-react-ui-kit";
 import Dashboard from "./Dashboard";
 import { Routes , Route } from 'react-router-dom';
-import Charts from "./Charts";
+import Charts from "./Charts/Charts";
 
 export default function Navbar() {
     const [showNavColorThird, setShowNavColorThird] = useState(false);

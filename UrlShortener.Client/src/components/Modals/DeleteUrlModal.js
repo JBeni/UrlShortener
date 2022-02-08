@@ -26,17 +26,17 @@ export default function DeleteUrlModal(props) {
                         <MDBBtn
                             className="btn-close"
                             color="none"
-                            onClick={(e) => closeModal(e, 0)}
+                            onClick={(e) => closeModal(e, false)}
                         ></MDBBtn>
                     </MDBModalHeader>
                         <MDBModalBody className="display-6" style={{ backgroundColor: '#FFCCCB' }}>
                             Are you sure you want to delete the url?
                         </MDBModalBody>
                     <MDBModalFooter>
-                        <MDBBtn color="secondary" onClick={(e) => closeModal(e, 0)}>
+                        <MDBBtn color="secondary" onClick={(e) => closeModal(e, false)}>
                             Close
                         </MDBBtn>
-                        <MDBBtn color="danger" onClick={(e) => closeModal(e, 1)}>
+                        <MDBBtn color="danger" onClick={(e) => closeModal(e, true)}>
                             Delete
                         </MDBBtn>
                     </MDBModalFooter>

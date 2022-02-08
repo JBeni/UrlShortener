@@ -12,14 +12,5 @@
                 ? Ok(result)
                 : BadRequest(result);
         }
-
-        [HttpGet("OSStatistics/{urlId}")]
-        public async Task<IActionResult> GetOSStatistics(int urlId)
-        {
-            var result = await Mediator.Send(new GetUrlStatisticsPerOSQuery { UrlId = urlId });
-            return result.Successful == true
-                ? Ok(result)
-                : BadRequest(result);
-        }
     }
 }

@@ -15,6 +15,13 @@ export const notifyToastInfo = (message) => {
     });
 }
 
+export const notifyToastError = (message) => {
+    toast.error(message, {
+        position: 'bottom-center',
+        duration: 3000,
+    });
+}
+
 export const copyToClipboard = (value) => {
     navigator.clipboard.writeText(value);
     notifyToastInfo("Value copied to clipboard");

@@ -13,12 +13,15 @@ import * as urlService from '../services/url.service';
 import DeleteUrlModal from "./Modals/DeleteUrlModal";
 import ErrorModal from "./Modals/ErrorModal";
 import { useNavigate  } from "react-router-dom";
+import UpdateUrlModal from "./Modals/UpdateUrlModal";
 
 export default function Dashboard() {
+    const [showError, setShowError] = useState(false);
+    const [showUpdateUrl, setShowUpdateUrl] = useState(false);
     const [showDeleteUrl, setShowDeleteUrl] = useState(false);
+
     const [selectedRow, setSelectedRow] = useState(0);
     const [urlsList, setUrlsList] = useState([]);
-    const [showError, setShowError] = useState(false);
     const [urlCreated, setUrlCreated] = useState(initialFormValues);
     const [url, setUrl] = useState({ originalUrl: ''});
 
@@ -57,11 +60,27 @@ export default function Dashboard() {
 
     const handleDeleteUrlPopup = async (value, isDelete) => {
         setShowDeleteUrl(value);
-        if (isDelete === 1) {
+        if (isDelete === true) {
             await urlService.deleteUrlShorten(selectedRow);
             notifyToastInfo("The Url was deleted");
             await getUrlsList();
         }
+    }
+
+    const handleUpdateUrlPopup = async (value) => {
+        setShowUpdateUrl(value);
+    }
+
+    const performUpdate = async (item) => {
+        var response = await urlService.updateUrlShorten(item.id);
+        setUrlCreated(response.item);
+        setUrl({ originalUrl: '' });
+        await getUrlsList();
+        openUpdateModal(true);
+    }
+
+    const openUpdateModal = (value) => {
+        setShowUpdateUrl(value);
     }
 
     const performDelete = (item) => {
@@ -72,16 +91,16 @@ export default function Dashboard() {
     const getTableHead = () => {
         return (
             <MDBRow className="mb-3">
-                <MDBCol className='col-md-4'>
+                <MDBCol className='col-md-3'>
                     Original Url
                 </MDBCol>
                 <MDBCol className='col-md-2'>
                     Short Url
                 </MDBCol>
-                <MDBCol className='col-md-2'>
+                <MDBCol className='col-2'>
                     Url Key
                 </MDBCol>
-                <MDBCol>
+                <MDBCol className="col-1">
                     Clicks
                 </MDBCol>
                 <MDBCol className="col-md-4">
@@ -127,6 +146,7 @@ export default function Dashboard() {
                                 type="submit"
                                 color="primary"
                                 style={{ marginRight: '10px' }}
+                                onClick={() => { performUpdate(item); }}
                             >
                                 Update
                             </MDBBtn>
@@ -230,6 +250,9 @@ export default function Dashboard() {
                 }
             </MDBContainer>
 
+            <MDBModal show={showUpdateUrl} setShow={setShowUpdateUrl} tabIndex='-1'>
+                <UpdateUrlModal item={urlCreated} handleUpdateUrlPopup={handleUpdateUrlPopup.bind(this)} />
+            </MDBModal>
             <MDBModal show={showDeleteUrl} setShow={setShowDeleteUrl} tabIndex='-1'>
                 <DeleteUrlModal id={selectedRow} handleDeleteUrlPopup={handleDeleteUrlPopup.bind(this)} />
             </MDBModal>

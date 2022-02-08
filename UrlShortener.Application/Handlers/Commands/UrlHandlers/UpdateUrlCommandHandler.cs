@@ -1,21 +1,22 @@
 ﻿namespace UrlShortener.Application.Handlers.Commands.UrlHandlers
 {
-    public class UpdateUrlCommand : IRequest<RequestResponse>
+    public class UpdateUrlCommand : IRequest<Result<UrlResponse>>
     {
         public int Id { get; set; }
         public string? EndpointUrl { get; set; }
     }
 
-    public class UpdateUrlCommandHandler : IRequestHandler<UpdateUrlCommand, RequestResponse>
+    public class UpdateUrlCommandHandler : IRequestHandler<UpdateUrlCommand, Result<UrlResponse>>
     {
         private readonly IApplicationDbContext _context;
-
-        public UpdateUrlCommandHandler(IApplicationDbContext context)
+        private readonly IMapper _mapper;
+        public UpdateUrlCommandHandler(IApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<RequestResponse> Handle(UpdateUrlCommand request, CancellationToken cancellationToken)
+        public async Task<Result<UrlResponse>> Handle(UpdateUrlCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -33,11 +34,21 @@
                 _context.Statistics.RemoveRange(statistics);
                 await _context.SaveChangesAsync(cancellationToken);
 
-                return RequestResponse.Success();
+                var urlMapped = _mapper.Map<UrlResponse>(entity);
+
+                return new Result<UrlResponse>
+                {
+                    Successful = true,
+                    Item = urlMapped ?? new UrlResponse()
+                };
             }
             catch (Exception ex)
             {
-                return RequestResponse.Failure($"Error occured when updating the url entry. {ex?.Message}. {ex?.InnerException?.Message}");
+                return new Result<UrlResponse>
+                {
+                    Successful = false,
+                    Error = $"Error occured when updating the url entry. {ex?.Message}. {ex?.InnerException?.Message}"
+                };
             }
         }
     }

@@ -18,7 +18,7 @@ export async function createUrlShorten(urlObject) {
 }
 
 export async function updateUrlShorten(urlObject) {
-    return axios.put(`${apiUrl}/url`, urlObject, {
+    return axios.put(`${apiUrl}/url`,  { id: urlObject }, {
         responseType: 'application/json',
     })
     .then((response) => {
