@@ -15,12 +15,11 @@ import { copyToClipboard } from '../../services/helper.service';
 export default function UpdateUrlModal(props) {
 
     useEffect(() => {
-        console.log(props.item);
     }, []);
 
-    const closeModal = (e, itemValue) => {
+    const closeModal = (e) => {
 		e.preventDefault();
-        props.handleUpdateUrlPopup(false, itemValue);
+        props.handleUpdateUrlPopup(false);
 	};
 
     return (
