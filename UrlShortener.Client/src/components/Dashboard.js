@@ -8,13 +8,12 @@ import {
     MDBModal,
     MDBInput
 } from "mdb-react-ui-kit";
-import { initialFormValues, notifyToastInfo, copyToClipboard, notifyToastError } from '../services/helper.service';
+import { initialFormValues, notifyToastInfo, copyToClipboard } from '../services/helper.service';
 import * as urlService from '../services/url.service';
 import DeleteUrlModal from "./Modals/DeleteUrlModal";
 import ErrorModal from "./Modals/ErrorModal";
 import { useNavigate  } from "react-router-dom";
 import UpdateUrlModal from "./Modals/UpdateUrlModal";
-import Pagination from "./Pagination";
 
 export default function Dashboard() {
     const [showError, setShowError] = useState(false);
