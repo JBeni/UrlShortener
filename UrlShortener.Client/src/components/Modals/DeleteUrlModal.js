@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
     MDBBtn,
     MDBModalDialog,
@@ -8,7 +8,6 @@ import {
     MDBModalBody,
     MDBModalFooter,
 } from "mdb-react-ui-kit";
-import * as urlService from '../../services/url.service';
 
 export default function DeleteUrlModal(props) {
 

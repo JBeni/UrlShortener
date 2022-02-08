@@ -14,6 +14,7 @@ import DeleteUrlModal from "./Modals/DeleteUrlModal";
 import ErrorModal from "./Modals/ErrorModal";
 import { useNavigate  } from "react-router-dom";
 import UpdateUrlModal from "./Modals/UpdateUrlModal";
+import Pagination from "./Pagination";
 
 export default function Dashboard() {
     const [showError, setShowError] = useState(false);
@@ -249,6 +250,7 @@ export default function Dashboard() {
                     getTableBody()
                 }
             </MDBContainer>
+            <Pagination />
 
             <MDBModal show={showUpdateUrl} setShow={setShowUpdateUrl} tabIndex='-1'>
                 <UpdateUrlModal item={urlCreated} handleUpdateUrlPopup={handleUpdateUrlPopup.bind(this)} />
