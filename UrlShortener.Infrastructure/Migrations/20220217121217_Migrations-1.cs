@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UrlShortener.Infrastructure.Migrations
 {
-    public partial class Migration1 : Migration
+    public partial class Migrations1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,8 +31,7 @@ namespace UrlShortener.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BrowserUsed = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    OperatingSystemUsed = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    UserAgentHeader = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     AccessedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UrlId = table.Column<int>(type: "int", nullable: false)
                 },

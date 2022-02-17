@@ -3,8 +3,7 @@
     public class CreateStatisticsCommand : IRequest<Result<StatisticsResponse>>
     {
         public int UrlId { get; set; }
-        public string? BrowserUsed { get; set; }
-        public string? OperatingSystemUsed { get; set; }
+        public string? UserAgentHeader { get; set; }
         public DateTime AccessedAt { get; set; }
     }
 
@@ -26,8 +25,7 @@
 
                 var entity = new Statistics
                 {
-                    BrowserUsed = request.BrowserUsed,
-                    OperatingSystemUsed = request.OperatingSystemUsed,
+                    UserAgentHeader = request.UserAgentHeader,
                     AccessedAt = request.AccessedAt,
                     Url = urlEntity
                 };

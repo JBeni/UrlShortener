@@ -12,8 +12,8 @@ using UrlShortener.Infrastructure.Persistence;
 namespace UrlShortener.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220208075904_Migration-1")]
-    partial class Migration1
+    [Migration("20220217121217_Migrations-1")]
+    partial class Migrations1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,18 +35,13 @@ namespace UrlShortener.Infrastructure.Migrations
                     b.Property<DateTime>("AccessedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("BrowserUsed")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                    b.Property<int>("UrlId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("OperatingSystemUsed")
+                    b.Property<string>("UserAgentHeader")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("UrlId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

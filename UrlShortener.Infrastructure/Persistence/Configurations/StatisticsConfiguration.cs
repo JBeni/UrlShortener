@@ -7,11 +7,8 @@
             builder.ToTable("Statistics");
             builder.HasKey(x => x.Id);
 
-            builder.Property(t => t.BrowserUsed)
+            builder.Property(t => t.UserAgentHeader)
                 .HasMaxLength(200)
-                .IsRequired();
-            builder.Property(t => t.OperatingSystemUsed)
-                .HasMaxLength(100)
                 .IsRequired();
             builder.Property(t => t.AccessedAt)
                 .IsRequired();

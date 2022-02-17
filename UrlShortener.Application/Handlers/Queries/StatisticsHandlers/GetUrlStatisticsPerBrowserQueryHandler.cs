@@ -25,11 +25,11 @@
                     .ProjectTo<StatisticsResponse>(_mapper.ConfigurationProvider)
                     .ToList();
 
-                var chrome = statistics.Where(x => x.BrowserUsed.Contains("Google Chrome")).Count();
-                var edge = statistics.Where(x => x.BrowserUsed.Contains("Microsoft Edge")).Count();
-                var opera = statistics.Where(x => x.BrowserUsed.Contains("Opera")).Count();
-                var safari = statistics.Where(x => x.BrowserUsed.Contains("Safari")).Count();
-                var firefox = statistics.Where(x => x.BrowserUsed.Contains("Mozilla Firefox")).Count();
+                var chrome = statistics.Where(x => x.UserAgentHeader.Contains("Google Chrome")).Count();
+                var edge = statistics.Where(x => x.UserAgentHeader.Contains("Microsoft Edge")).Count();
+                var opera = statistics.Where(x => x.UserAgentHeader.Contains("Opera")).Count();
+                var safari = statistics.Where(x => x.UserAgentHeader.Contains("Safari")).Count();
+                var firefox = statistics.Where(x => x.UserAgentHeader.Contains("Firefox")).Count();
 
                 var response = new List<DataChartResponse>()
                 {

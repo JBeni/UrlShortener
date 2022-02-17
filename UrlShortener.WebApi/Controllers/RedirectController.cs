@@ -9,13 +9,15 @@
             var result = await Mediator.Send(new GetUrlByUrlKeyQuery { UrlKey = urlKey });
 
             if (!result.Successful) return BadRequest(result);
-            await Mediator.Send(new CreateStatisticsCommand
+            var command = new CreateStatisticsCommand
             {
                 UrlId = result.Item.Id,
-                BrowserUsed = Request.Headers["sec-ch-ua"].FirstOrDefault(),
-                OperatingSystemUsed = Request.Headers["sec-ch-ua-platform"].FirstOrDefault(),
+                UserAgentHeader = Request.Headers["sec-ch-ua"].FirstOrDefault() != null
+                    ? Request.Headers["sec-ch-ua"].FirstOrDefault()
+                    : Request.Headers["User-Agent"].FirstOrDefault(),
                 AccessedAt = DateTime.Now
-            });
+            };
+            await Mediator.Send(command);
 
             return RedirectPermanent(result.Item.OriginalUrl);
         }
