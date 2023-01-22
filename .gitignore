@@ -358,5 +358,3 @@ ASALocalRun/
 /UrlShortener.Client/npm-debug.log*
 /UrlShortener.Client/yarn-debug.log*
 /UrlShortener.Client/yarn-error.log*
-
-/UrlShortener.Client/package-lock.json
